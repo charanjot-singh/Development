@@ -245,7 +245,7 @@ if(isset($_GET['filter']) && $_GET['filter'] != '')
                         $html.='
                                <td style="font-size:8px;font-weight:normal;text-align:right;">$'.number_format($trans_data['invest_amount'],2).'</td>
                                <td style="font-size:8px;font-weight:normal;text-align:right;">$'.number_format($trans_data['commission_received'],2).'</td>
-                               <td style="font-size:8px;font-weight:normal;text-align:center;">$'.number_format($trans_data['charge_amount'],2).'</td>';
+                               <td style="font-size:8px;font-weight:normal;text-align:right;">$'.number_format($trans_data['charge_amount'],2).'</td>';
                         $html.='</tr>';
                     }
                 }

@@ -113,6 +113,10 @@
 		$last_contacted = isset($data['last_contacted'])?$this->re_db_input(date('Y-m-d',strtotime($data['last_contacted']))):'0000-00-00';
 		$objectives = isset($data['objectives'])?($data['objectives']):array();
 
+		$split_rate_category = isset($data['split_rate_category'])?$this->re_db_input($data['split_rate_category']):'';
+		$split_rate_to = isset($data['split_rate_to'])?$this->re_db_input($data['split_rate_to']):'';
+		$split_rate_from = isset($data['split_rate_from'])?$this->re_db_input($data['split_rate_from']):'';
+
 		if($lname==''){
 			$this->errors = 'Please enter last name.';
 		} else if($broker_name==''){
@@ -153,7 +157,7 @@
 				return $this->errors;
 			} else if($id>=0){
 				if($id==0){
-					$q = "INSERT INTO `".$this->table."` SET `first_name`='".$fname."',`last_name`='".$lname."',`mi`='".$mi."',`do_not_contact`='".$do_not_contact."',`active`='".$active."',`ofac_check`='".$ofak_check."',`fincen_check`='".$fincen_check."',`long_name`='".$long_name."',`client_file_number`='".$client_file_number."',`clearing_account`='".$clearing_account."',`client_ssn`='".$client_ssn."',`house_hold`='".$household."',`split_broker`='".$split_broker."',`split_rate`='".$split_rate."',`address1`='".$address1."',`address2`='".$address2."',`city`='".$city."',`state`='".$state."',`zip_code`='".$zip_code."',`citizenship`='".$citizenship."',`birth_date`='".$birth_date."',`date_established`='".$date_established."',`age`='".$age."',`open_date`='".$open_date."',`naf_date`='".$naf_date."',`last_contacted`='".$last_contacted."',`account_type`='".$account_type."',`broker_name`='".$broker_name."',`telephone`='".$telephone."',`contact_status`='".$contact_status."',`reviewed_at`='".$reviewed_at."',`reviewed_by`='".$reviewed_by."',`is_reviewed`='".$is_reviewed."'".$this->insert_common_sql();
+					$q = "INSERT INTO `".$this->table."` SET `first_name`='".$fname."',`last_name`='".$lname."',`mi`='".$mi."',`do_not_contact`='".$do_not_contact."',`active`='".$active."',`ofac_check`='".$ofak_check."',`fincen_check`='".$fincen_check."',`long_name`='".$long_name."',`client_file_number`='".$client_file_number."',`clearing_account`='".$clearing_account."',`client_ssn`='".$client_ssn."',`house_hold`='".$household."',`split_broker`='".$split_broker."',`split_rate`='".$split_rate."',`address1`='".$address1."',`address2`='".$address2."',`city`='".$city."',`state`='".$state."',`zip_code`='".$zip_code."',`citizenship`='".$citizenship."',`birth_date`='".$birth_date."',`date_established`='".$date_established."',`age`='".$age."',`open_date`='".$open_date."',`naf_date`='".$naf_date."',`last_contacted`='".$last_contacted."',`account_type`='".$account_type."',`broker_name`='".$broker_name."',`telephone`='".$telephone."',`contact_status`='".$contact_status."',`reviewed_at`='".$reviewed_at."',`reviewed_by`='".$reviewed_by."',`is_reviewed`='".$is_reviewed."',`split_rate_to`='".$split_rate_to."',`split_rate_from`='".$split_rate_from."',`split_rate_category`='".$split_rate_category."' ".$this->insert_common_sql();
 					$res = $this->re_db_query($q);
 					$client_id= $this->re_db_insert_id();
 					$_SESSION['client_id'] = $client_id;
@@ -173,7 +177,7 @@
 						return false;
 					}
 				} else if($id>0) {
-					$q = "UPDATE `".$this->table."` SET `first_name`='".$fname."',`last_name`='".$lname."',`mi`='".$mi."',`do_not_contact`='".$do_not_contact."',`active`='".$active."',`ofac_check`='".$ofak_check."',`fincen_check`='".$fincen_check."',`long_name`='".$long_name."',`client_file_number`='".$client_file_number."',`clearing_account`='".$clearing_account."',`client_ssn`='".$client_ssn."',`house_hold`='".$household."',`split_broker`='".$split_broker."',`split_rate`='".$split_rate."',`address1`='".$address1."',`address2`='".$address2."',`city`='".$city."',`state`='".$state."',`zip_code`='".$zip_code."',`citizenship`='".$citizenship."',`birth_date`='".$birth_date."',`date_established`='".$date_established."',`age`='".$age."',`open_date`='".$open_date."',`naf_date`='".$naf_date."',`last_contacted`='".$last_contacted."',`account_type`='".$account_type."',`broker_name`='".$broker_name."',`telephone`='".$telephone."',`contact_status`='".$contact_status."',`reviewed_at`='".$reviewed_at."',`reviewed_by`='".$reviewed_by."',`is_reviewed`='".$is_reviewed."'".$this->update_common_sql()." WHERE `id`='".$id."'";
+					$q = "UPDATE `".$this->table."` SET `first_name`='".$fname."',`last_name`='".$lname."',`mi`='".$mi."',`do_not_contact`='".$do_not_contact."',`active`='".$active."',`ofac_check`='".$ofak_check."',`fincen_check`='".$fincen_check."',`long_name`='".$long_name."',`client_file_number`='".$client_file_number."',`clearing_account`='".$clearing_account."',`client_ssn`='".$client_ssn."',`house_hold`='".$household."',`split_broker`='".$split_broker."',`split_rate`='".$split_rate."',`address1`='".$address1."',`address2`='".$address2."',`city`='".$city."',`state`='".$state."',`zip_code`='".$zip_code."',`citizenship`='".$citizenship."',`birth_date`='".$birth_date."',`date_established`='".$date_established."',`age`='".$age."',`open_date`='".$open_date."',`naf_date`='".$naf_date."',`last_contacted`='".$last_contacted."',`account_type`='".$account_type."',`broker_name`='".$broker_name."',`telephone`='".$telephone."',`contact_status`='".$contact_status."',`reviewed_at`='".$reviewed_at."',`reviewed_by`='".$reviewed_by."',`is_reviewed`='".$is_reviewed."',`split_rate_to`='".$split_rate_to."',`split_rate_from`='".$split_rate_from."',`split_rate_category`='".$split_rate_category."' ".$this->update_common_sql()." WHERE `id`='".$id."'";
 					$res = $this->re_db_query($q);
 
 					if($res){
@@ -1225,6 +1229,24 @@
 				return false;
 			}
 		}
+
+
+		 function search_client_record($value){
+		 	   $return=array();
+		 	     $q = "SELECT cm.id as id ,CONCAT(`cm`.last_name,', ',`cm`.first_name) as name,ca.account_no,client_file_number,client_ssn,broker_name
+					FROM `" . $this->table . "` AS `cm` left join `".CLIENT_ACCOUNT."` as ca on (ca.client_id=cm.id)
+                    WHERE `cm`.`is_delete`='0' and `ca`.`is_delete`='0' and (ca.account_no like '".$value."%' or client_file_number like '".$value."%' or client_ssn like '".$value."%' )
+                    ORDER BY `cm`.`id` ASC limit 10";
+					$res = $this->re_db_query($q);
+					  if($this->re_db_num_rows($res)>0){
+					  	while($row = $this->re_db_fetch_array($res)){
+					  			$row['value']=$row['name'];
+					  	              
+    								$return[] = $row;
+    						}
+            }
+				return $return;
+		 }
 
     }
 ?>
